@@ -1,0 +1,3 @@
+[submodule "deps/opencvhdfs"]
+	path = deps/opencvhdfs
+	url = https://github.com/krisoft/opencvhdfs.git

@@ -1,0 +1,6 @@
+#ifndef VERSION_H
+#define VERSION_H
+
+#define VERSION "@GIT_REFSPEC@ @GIT_SHA1@"
+
+#endif //VERSION_H
