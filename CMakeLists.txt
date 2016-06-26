@@ -25,7 +25,6 @@ get_git_head_revision(GIT_REFSPEC GIT_SHA1)
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/version.h.in" "${CMAKE_CURRENT_BINARY_DIR}/cmake/version.h" @ONLY)
 
 file(GLOB lens_undistort_SRC
-	src/main_lens_undistort.cpp
     src/distort.cpp
     src/fitUndistorsionModel.cpp
     src/lines.cpp
@@ -33,7 +32,7 @@ file(GLOB lens_undistort_SRC
     src/undistort.cpp
 )
 
-add_executable(lens_undistort ${lens_undistort_SRC})
+add_executable(lens_undistort src/main_lens_undistort.cpp ${lens_undistort_SRC})
 target_link_libraries(lens_undistort
 	${CERES_LIBRARIES}
 	gflags
@@ -44,6 +43,22 @@ target_link_libraries(lens_undistort
 
 add_executable(unwrap src/main_unwrap)
 target_link_libraries(unwrap
+	${CERES_LIBRARIES}
+	gflags
+	${OpenCV_LIBS}
+	opencvhdfs_lib
+)
+
+
+add_executable(stereo_checkerboard_extractor src/main_stereo_checkerboard_extractor)
+target_link_libraries(stereo_checkerboard_extractor
+	${CERES_LIBRARIES}
+	gflags
+	${OpenCV_LIBS}
+)
+
+add_executable(stereo_calibration src/main_stereo_calibration.cpp ${lens_undistort_SRC})
+target_link_libraries(stereo_calibration
 	${CERES_LIBRARIES}
 	gflags
 	${OpenCV_LIBS}

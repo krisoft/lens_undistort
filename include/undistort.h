@@ -27,5 +27,15 @@ void prepare_unwrap(
 	cv::Mat &unwrap_mask
 );
 
+// this one is very slow, on the order of distort running time times undistorted image area
+void concatenate_rectification_map_and_unwrap(
+	const double undistorsion_factors[MODEL_SIZE],
+	cv::Mat &rectification_map,
+	cv::Size frame_size,
+	double unwrap_factor,
+	cv::Mat &unwrap_map,
+	cv::Mat &unwrap_mask
+);
+
 
 #endif // UNDISTORT_H
